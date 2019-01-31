@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 使用watch监听数据变化 -->
+            <input type="text" v-model="aa"> + 
+            <input type="text" v-model="bb"> =
+            <input type="text" v-model="msg">
+            <p>{{msg}}</p>
+            <p>{{msg}}</p>
+            <p>{{msg}}</p>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    aa:11,
+                    bb:22,
+                    msg:0
+                },
+                methods: {
+
+                },
+                /* 是vm 实例中的属性 , 可以监视指定数据变化, 是一个对象,在对象中添加方法, 方法名就是要监视的数据(该数据必须存在, 可以是data中的数据, 也可是是vm实例上的数据例如:$route) */
+                watch:{
+                    'aa':function(to,from){
+                        console.log('这是改变后的数据: ' + to);
+                        console.log('这是改变前的数据: ' + from);
+                        this.msg = parseInt(to) + parseInt(this.bb)
+                    },
+                    'bb':function(to,from){
+                        console.log('这是改变后的数据: ' + to);
+                        console.log('这是改变前的数据: ' + from);
+                        this.msg = parseInt(to) + parseInt(this.aa)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h3>不使用key</h3>
+            用户名: <input  v-if='flag' placeholder="用户名" />
+            邮箱: <input v-else-if placeholder="邮箱"/>
+            <h3>使用key</h3>
+            用户名: <input  v-if='flag' key='username' placeholder="用户名"/>
+            邮箱: <input  v-else-if  key='useremail' placeholder="邮箱"/>
+            <input type="button" @click="isshow" value="点我">
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg1:"这是第一条消息",
+                    msg2:"这是第二条消息",
+                    flag : true
+                },
+                methods: {
+                    isshow(){
+                        setTimeout(() => {
+                            this.flag = !this.flag
+                        }, 1000);
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

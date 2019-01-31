@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+        <style>
+            .active{
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <h1 @click="btn" :class="[active]">点我,改变背景色</h1>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    active:'active'
+                },
+                methods:{
+                    btn(){
+                        this.active = this.active === 'active'? "":"active"
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

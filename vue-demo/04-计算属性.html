@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 使用计算属性监听数据变化 -->
+            <input type="text" v-model="aa"> + 
+            <input type="text" v-model="bb"> =
+            <input type="text" v-model="msg">
+            <p>{{msg}}</p>
+            <p>{{msg}}</p>
+            <p>{{msg}}</p>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    aa:11,
+                    bb:22
+                },
+                methods: {
+
+                },
+                computed: {
+                    //5 在data中定义了的属性名, 在computed中不能定义重名属性,否则会冲突,报错
+                    //1 计算属性虽然看起来是一个方法,但是在引用的时候,一定不要用()去调用,直接把它当做普通属性使用
+                    //2 只要计算属性这个 function 内部,所用到的任何 data 中的数据发生了变化, 就会立即重新计算这个计算属性的值
+                    //3 计算属性的求值结果,会被直接缓存起来,方便下次直接使用,如果计算属性方法中的数据没有任何改变, 则不会对计算属性重新求值
+                    //4 这个计算属性默认是只读的,不能手动改变,毕竟是return回来的
+                    msg:function(){
+                        console.log("计算属性重新求值了");
+                        return parseInt(this.aa) + parseInt(this.bb)
+                        
+                    }
+                },
+            })
+        </script>
+    </body>
+</html>
