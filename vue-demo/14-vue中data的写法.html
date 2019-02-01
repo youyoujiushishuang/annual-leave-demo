@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <table>
+                <tbody>
+                    <tr is="row"></tr>
+                    <tr is="row"></tr>
+                    <tr is="row"></tr>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            /* Vue.component('row',{
+                data:{
+                    content:"这是vm实例中的data的写法"
+                },
+                template:"<tr><td>{{content}}</td></tr>"
+            }) */
+            //会报错:The "data" option should be a function that returns a per-instance value in component definitions.
+
+            //在组件中的data是一个函数,函数要返回一个对象,对象中就可以写数据了
+            Vue.component('row',{
+                data(){
+                    return {
+                        content:"这是组件中的data的写法"
+                    }
+                },
+                template:"<tr><td>{{content}}</td></tr>"
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                methods: {
+
+                }
+            })
+        </script>
+    </body>
+</html>
