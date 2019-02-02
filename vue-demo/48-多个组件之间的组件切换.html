@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+        <style>
+            .v-enter,
+            .v-leave-to{
+                opacity: 0;
+            }
+            .v-enter-active,
+            .v-leave-active{
+                transition: all 2s ease;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <transition mode="out-in">
+                <component :is="flag"></component>
+            </transition>
+            <button @click="change">点击切换组件</button>
+        </div>
+        
+        <script>
+            Vue.component('child1',{
+                template:'<div>我是组件1</div>'
+            })
+            Vue.component('child2',{
+                template:'<div>我是组件2</div>'
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:'child1'
+                },
+                methods: {
+                    change(){
+                        this.flag = this.flag == "child1"? "child2" : "child1"
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

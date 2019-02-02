@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 使用is 属性可以确定是放哪个组件 -->
+            <component :is="flag"></component>
+            <hr>
+            <div :is="flag"></div>
+            <input type="button" value="点击切换组件" @click="change">
+        </div>
+        <script>
+            /* 定义两个组件 */
+            Vue.component("one",{
+                template:"<div>我是组件one</div>"
+            })
+            Vue.component('two',{
+                template:"<div>我是组件two</div>"
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:"one"
+                },
+                methods: {
+                    change(){
+                        this.flag = this.flag == "one" ? "two":"one"
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

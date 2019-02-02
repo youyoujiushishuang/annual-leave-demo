@@ -21,14 +21,20 @@
      var item={
          //Prop 是你可以在组件上注册的一些自定义特性。  当一个值传递给一个 prop 特性的时候，它就变成了那个组件实例的一个属性。
          props:["content"],
-         template:'<div @click="add">{{content}}</div>',
+         template:'<div @click="add">{{num}}</div>',
          created() {
              console.log(typeof(this.content))
+         },
+         data(){
+             return {
+                 num:this.content
+             }
          },
          methods:{
              add(){
                  /* 点击,让父组件中的数据改变,这是不建议的,因为在vue中父组件向子组件传值是单向流,强烈不建议子组件去改变父组件传递过来的数据 */
-                 this.content++
+                //  this.content++
+                this.num++
              }
          }
      }

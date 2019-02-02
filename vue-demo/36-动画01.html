@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+        <style>
+            .fade-enter,
+            .fade-leave-to{
+                opacity: 0;
+            }
+            .fade-enter-active,
+            .fade-leave-active{
+                transition: all 0.5s ease;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 将要进行动画的元素用transition标签包裹起来,在tyle标签中写类样式 -->
+            <!-- transition标签的name属性可以指定类名的前缀,不指定的话,默认是v -->
+            <transition name="fade">
+                <div v-show="flag">hello world</div>
+            </transition>
+            <button @click="change">点击切换</button>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true
+                },
+                methods: {
+                    change(){
+                        this.flag = !this.flag
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>使用第三方库进行动画操作</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+        <link rel="stylesheet" href="./lib/animate.css">
+        <style>
+            .fade-enter,
+            .fade-leave-to{
+                opacity: 0;
+            }
+            .fade-enter-active,
+            .fade-leave-active{
+                transition: all 2s ease;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 将要进行动画的元素用transition标签包裹起来,在tyle标签中写类样式 -->
+            <!-- transition标签的name属性可以指定类名的前缀,不指定的话,默认是v -->
+            <!-- 使用第三方库就是使用另外的css文件中定义好的样式类名 -->
+            <!-- 增加appear属性,一进入页面就有动画效果 -->
+            <!-- 可以设置两种动画效果,一个是第三方库里的,一个是自己写的 -->
+            <!-- type="transition" 是设置以哪个的动画时长为准 -->
+            <!-- :duration='10000' 自定义设置动画的时长,单位是毫秒,开场动画和离场动画都是10s -->
+            <!-- :duration="{enter:5000,leave:10000}" 设置入场动画时间为5s , 出场动画时间为10s -->
+            <transition 
+            name="fade"
+            appear
+            :duration="{enter:5000,leave:10000}"
+            enter-active-class="animated swing fade-enter-active"
+            leave-active-class="animated shake fade-leave-active" 
+            appear-active-class="animated shake" >
+                <div v-show="flag">hello world</div>
+            </transition>
+            <button @click="change">点击切换</button>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true
+                },
+                methods: {
+                    change(){
+                        this.flag = !this.flag
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>使用第三方库进行动画操作</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+        <link rel="stylesheet" href="./lib/animate.css">
+    </head>
+    <body>
+        <div id="app">
+            <transition 
+            @before-leave="beforeHandle"
+            @leave="leaveHandle"
+            @after-leave="afterLeaveHandle">
+                <div v-show="flag">hello world</div>
+            </transition>
+            <button @click="change">点击切换</button>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true
+                },
+                methods: {
+                    change(){
+                        this.flag = !this.flag
+                    },
+                    beforeHandle(el){
+                        el.style.color='red'
+                    },
+                    leaveHandle(el,done){
+                        setTimeout(() => {
+                            el.style.fontSize = '50px'
+                            el.backgroundColor = 'black'
+                        }, 2000)
+                        setTimeout(() => {
+                            //这里要先调用done一次,不然 afterEnterHandle 不会执行
+                            done()
+                        }, 4000);
+                    },
+                    afterLeaveHandle(el){
+                        el.style.fontSize = '16px'
+                        el.backgroundColor = ''
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

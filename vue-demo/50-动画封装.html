@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+        <style>
+            .v-enter,
+            .v-leave-to{
+                opacity: 0;
+            }
+            .v-enter-active,
+            .v-leave-active{
+                transition: all 2s ease
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <fade :flags="flag">
+                <div>hello world</div>
+            </fade>
+            <fade :flags="flag">
+                <div>你好</div>
+            </fade>
+            <input type="button" value="点我" @click="change">
+        </div>
+        <script>
+            /* 定义组件 */
+            Vue.component('fade',{
+                props:["flags"],
+                template:
+                    `<transition mode="out-in">
+                        <slot v-if="flags"></slot>
+                    </transition>
+                    `
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true
+                },
+                methods: {
+                    change(){
+                        this.flag =!this.flag
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

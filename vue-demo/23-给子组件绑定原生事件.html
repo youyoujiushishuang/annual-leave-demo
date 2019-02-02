@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <item @click="handle"></item>
+        </div>
+        <script>
+            Vue.component('item',{
+                template:`<div @click="dianwo">我要绑定原生事件</div>`,
+                methods:{
+                    dianwo(){
+                        console.log('这是子组件定义的事件');
+                        //子组件调用父组件的事件
+                        this.$emit('click')
+                    }
+                }
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                methods: {
+                    handle(){
+                        console.log('这是父组件中的事件');
+                        
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

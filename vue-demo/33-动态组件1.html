@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 注意这里的判断中,双引号内部表示可以写js代码,one/two 还是字符串,需要加引号 -->
+            <one v-if="flag == 'one'"></one>
+            <two v-if="flag == 'two'"></two>
+            <input type="button" value="点击切换组件" @click="change">
+        </div>
+        <script>
+            /* 定义两个组件 */
+            Vue.component("one",{
+                template:"<div>我是组件one</div>"
+            })
+            Vue.component('two',{
+                template:"<div>我是组件two</div>"
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:"one"
+                },
+                methods: {
+                    change(){
+                        this.flag = this.flag == "one" ? "two":"one"
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h3>子组件向父组件传值,就是子组件调用父组件中定义的方法时,将子组件中的数据当做参数传递过去</h3>
+            <item :content="0" @getsum="jia"></item>
+            <item :content="1" @getsum="jia"></item>
+            <!-- 下面div上绑定的自定义事件是属于父组件也就是vm实例上的 -->
+            <div>上面两个组件中的数字的和是: {{total}}</div>
+        </div>
+        <script>
+            Vue.component('item',{
+                props:["content"],
+                data(){
+                    return {
+                        num:this.content,
+                        son:2
+                    }
+                },
+                template:'<div @click="add">{{num}}</div>',
+                // 子组件可以使用 $emit 触发父组件上定义的事件。
+                methods:{
+                    add(){
+                        this.num = this.num +2
+                        /* 在子组件上调用父组件的方法 */
+                        this.$emit("getsum",this.son)
+                    }
+                }
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    total:1
+                },
+                methods: {
+                    jia(val){
+                        console.log(this.total);
+                        console.log(val);
+                        
+                        this.total += val
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

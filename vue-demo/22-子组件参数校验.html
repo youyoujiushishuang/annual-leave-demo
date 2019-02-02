@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <item :content="msg"></item>
+        </div>
+        <script>
+            Vue.component('item',{
+                //用props属性来决定子组件接收数据的类型
+                props:{
+                    content:{
+                        type:[Number,String],    //决定子组件接收数据的类型
+                        required:true,  //表示父组件必须要传递值,如果没有传递,就会报错
+                        default:"你好", //如果父组件没有传递值,就用此默认值
+                        validator(val){
+                            console.log(val);   //这里的val是父组件传递过来的数据,对此数据进行验证
+                            //如果验证不符合条件,则会报错: Invalid prop: custom validator check failed for prop "content".
+                            return val.length >5
+                        }
+                    }
+                },
+                template:'<div>{{content}}</div>'
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg:'hello'
+                }
+            })
+        </script>
+    </body>
+</html>

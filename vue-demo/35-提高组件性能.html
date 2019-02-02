@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 使用is 属性可以确定是放哪个组件 -->
+            <component :is="flag"></component>
+            <hr>
+            <!-- <div :is="flag"></div> -->
+            <input type="button" value="点击切换组件" @click="change">
+        </div>
+        <script>
+            /* 定义两个组件 */
+            /* v-once在日常开发中用的很多，只渲染元素和组件一次，随后的渲染，使用了此指令的元素/组件及其所有的子节点，都会当作静态内容并跳过，这可以用于优化更新性能。 */
+            Vue.component("one",{
+                template:"<div v-once>我是组件one</div>"
+            })
+            Vue.component('two',{
+                template:"<div v-once>我是组件two</div>"
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:"one"
+                },
+                methods: {
+                    change(){
+                        this.flag = this.flag == "one" ? "two":"one"
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

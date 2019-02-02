@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>使用第三方库进行动画操作</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+        <link rel="stylesheet" href="./lib/animate.css">
+        <style>
+            /* 定义动画 */
+            /* @keyframes moving{
+                0% {
+                    transform: scale(0)
+                }
+
+                50% {
+                    transform: scale(2)
+                }
+
+                100% {
+                    transform: scale(1)
+                }
+            }
+
+            .enter{
+                transform-origin: left center;
+                animation: moving 2s;
+            }
+            .leave{
+                transform-origin: left center;
+                animation: moving 2s reverse;
+            } */
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 将要进行动画的元素用transition标签包裹起来,在tyle标签中写类样式 -->
+            <!-- transition标签的name属性可以指定类名的前缀,不指定的话,默认是v -->
+            <!-- 使用第三方库就是使用另外的css文件中定义好的样式类名 -->
+            <transition 
+            name="fade"
+            enter-active-class="animated swing"
+            leave-active-class="animated shake" >
+                <div v-show="flag">hello world</div>
+            </transition>
+            <button @click="change">点击切换</button>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true
+                },
+                methods: {
+                    change(){
+                        this.flag = !this.flag
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

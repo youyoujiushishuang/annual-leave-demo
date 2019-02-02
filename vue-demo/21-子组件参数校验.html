@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- Invalid prop: type check failed for prop "content". Expected Number, String, got Boolean with value false. -->
+            <!-- <item :content=false></item> -->
+            <item :content="10"></item>
+        </div>
+        <script>
+            Vue.component('item',{
+                //用props属性来决定子组件接收数据的类型
+                props:{
+                    content:[Number]    //这里表示,从父组件传递过来的数据,子组件都要当做数值类型来接收,否则会报错
+                },
+                template:'<div>{{content}}</div>'
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                }
+            })
+        </script>
+    </body>
+</html>
